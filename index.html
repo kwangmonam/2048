@@ -113,7 +113,10 @@
         let history = [];
         let bestScore = 0;
         let startCoord;
+        let startX;
+        let startY;
 
+        
 
         window.addEventListener('keyup', (event) => {
             if (event.key === 'ArrowUp') {
@@ -146,6 +149,35 @@
             }
         });
 
+        window.addEventListener('touchstart', (event) => {
+            const touch = event.touches[0];
+            startX = touch.clientX;
+            startY = touch.clientY;
+        });
+
+        window.addEventListener('touchend', (event) => {
+            const touch = event.changedTouches[0];
+            const endX = touch.clientX;
+            const endY = touch.clientY;
+            const deltaX = endX - startX;
+            const deltaY = endY - startY;
+            const threshold = 50; // Adjust this value to set the sensitivity of the swipe
+
+            if (Math.abs(deltaX) > Math.abs(deltaY)) {
+                if (deltaX > threshold) {
+                    moveCells('right');
+                } else if (deltaX < -threshold) {
+                    moveCells('left');
+                }
+            } else {
+                if (deltaY > threshold) {
+                    moveCells('down');
+                } else if (deltaY < -threshold) {
+                    moveCells('up');
+                }
+            }
+        });
+
         $back.addEventListener('click', () => {
             const prevData = history.pop();
             if (!prevData) {
@@ -158,15 +190,16 @@
         })
 
         $restart.addEventListener('click', () => {
-            while ($table.firstChild) {                
+            while ($table.firstChild) {
                 $table.removeChild($table.firstChild);
             }
             data = [];
             history = [];
             $score.textContent = 0;
             startGame();
-            
+
         })
+
 
 
         function startGame() {
