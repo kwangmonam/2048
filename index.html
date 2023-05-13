@@ -116,7 +116,7 @@
         let startX;
         let startY;
 
-        
+
 
         window.addEventListener('keyup', (event) => {
             if (event.key === 'ArrowUp') {
@@ -153,6 +153,10 @@
             const touch = event.touches[0];
             startX = touch.clientX;
             startY = touch.clientY;
+        });
+
+        window.addEventListener('touchmove', (event) => {
+            event.preventDefault();
         });
 
         window.addEventListener('touchend', (event) => {
