@@ -11,6 +11,11 @@
             margin-bottom: 10px;
         }
 
+        #block-score {
+            margin-bottom: 10px;
+            font-size: 30px;
+        }
+
         #table {
             border-collapse: collapse;
             user-select: none;
@@ -18,9 +23,9 @@
 
         #table td {
             border: 5px solid #bbada0;
-            width: 60px;
-            height: 60px;
-            font-size: 30px;
+            width: 80px;
+            height: 80px;
+            font-size: 40px;
             font-weight: bold;
             text-align: center;
         }
@@ -28,6 +33,13 @@
         #score {
             user-select: none;
             margin-right: 5px;
+        }
+
+        button {
+            width: 160px;
+            height: 40px;
+            margin-right: 20px;
+            font-size: 20px;
         }
 
         .color-2 {
@@ -91,7 +103,7 @@
     <div id="block">
         <table id="table"></table>
     </div>
-    <div id="block">
+    <div id="block-score">
         <span>점수:</span>
         <span id="score">0</span>
         <span>최고점수:</span>
@@ -103,6 +115,7 @@
     </div>
     <!-- script -->
     <script>
+        const $block = document.querySelector('#block');
         const $table = document.querySelector('#table');
         const $score = document.querySelector('#score');
         const $bestScore = document.querySelector('#best-score');
@@ -149,17 +162,17 @@
             }
         });
 
-        window.addEventListener('touchstart', (event) => {
+        $block.addEventListener('touchstart', (event) => {
             const touch = event.touches[0];
             startX = touch.clientX;
             startY = touch.clientY;
         });
 
-        window.addEventListener('touchmove', (event) => {
+        $block.addEventListener('touchmove', (event) => {
             event.preventDefault();
         });
 
-        window.addEventListener('touchend', (event) => {
+        $block.addEventListener('touchend', (event) => {
             const touch = event.changedTouches[0];
             const endX = touch.clientX;
             const endY = touch.clientY;
