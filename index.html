@@ -392,6 +392,10 @@
 
             if (data.flat().includes(2048)) {
                 draw();
+                if (bestScore < parseInt($score.textContent)) {
+                    bestScore = parseInt($score.textContent);
+                    $bestScore.textContent = bestScore;
+                }
                 setTimeout(() => {
                     alert(`승리!`);
                 }, 100);
